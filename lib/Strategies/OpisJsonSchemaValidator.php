@@ -20,20 +20,37 @@ use RuntimeException;
  * Converts Opis's nested error tree into a flat list of
  * {@see ValidationFailure} entries so callers see one row per actual
  * violation rather than container errors (allOf / oneOf / anyOf).
+ *
+ * The Opis {@see Validator} is constructed by {@see buildValidator()}.
+ * Subclass and override that method to register custom keywords, resolver
+ * prefixes, or other Opis-specific behavior. The no-arg constructor keeps
+ * the class safe to auto-wire through standard dependency injection
+ * containers.
  */
-final class OpisJsonSchemaValidator implements JsonSchemaValidatorStrategy
+class OpisJsonSchemaValidator implements JsonSchemaValidatorStrategy
 {
     private readonly Validator $validator;
 
-    public function __construct(?Validator $validator = null)
+    public function __construct()
     {
-        if ($validator === null) {
-            $validator = new Validator();
-            $validator->setMaxErrors(PHP_INT_MAX);
-            $validator->setStopAtFirstError(false);
-        }
+        $this->validator = $this->buildValidator();
+    }
 
-        $this->validator = $validator;
+    /**
+     * Build the underlying Opis validator. Override to customize.
+     *
+     * The default instance is configured with
+     * {@see Validator::setMaxErrors()} and
+     * {@see Validator::setStopAtFirstError()} so every violation surfaces
+     * in a single pass, matching the abstraction's contract.
+     */
+    protected function buildValidator(): Validator
+    {
+        $validator = new Validator();
+        $validator->setMaxErrors(PHP_INT_MAX);
+        $validator->setStopAtFirstError(false);
+
+        return $validator;
     }
 
     /**

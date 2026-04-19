@@ -48,16 +48,25 @@ The `$schemaUri` argument accepts:
 
 ### Custom Opis configuration
 
-Inject a preconfigured `Opis\JsonSchema\Validator` to customize keyword registration, resolver prefixes, or other Opis behavior:
+Subclass `OpisJsonSchemaValidator` and override the protected `buildValidator()` method to customize keyword registration, resolver prefixes, or other Opis behavior:
 
 ```php
 use Opis\JsonSchema\Validator as OpisValidator;
+use PHPNomad\OpisJsonSchema\Integration\Strategies\OpisJsonSchemaValidator;
 
-$opis = new OpisValidator();
-$opis->resolver()->registerPrefix('https://my-site.example/', '/path/to/schemas');
+final class MySiteJsonSchemaValidator extends OpisJsonSchemaValidator
+{
+    protected function buildValidator(): OpisValidator
+    {
+        $validator = parent::buildValidator();
+        $validator->resolver()->registerPrefix('https://my-site.example/', '/path/to/schemas');
 
-$validator = new OpisJsonSchemaValidator($opis);
+        return $validator;
+    }
+}
 ```
+
+The no-arg constructor keeps the class safe to auto-wire through standard dependency injection containers.
 
 ## How failures are reported
 
