@@ -112,7 +112,7 @@ final class OpisJsonSchemaValidator implements JsonSchemaValidatorStrategy
 
     private function formatPath(OpisValidationError $error): string
     {
-        $pointer = $error->data()->path();
+        $pointer = $error->data()->fullPath();
 
         return $pointer === [] ? '' : implode('.', array_map('strval', $pointer));
     }
