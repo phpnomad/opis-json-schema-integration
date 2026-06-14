@@ -198,16 +198,16 @@
         },
         {
             "name": "phpnomad/json-schema",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpnomad/json-schema.git",
-                "reference": "3836658f68e971cfa5a2400b1aa62e84c2becdae"
+                "reference": "16fcc96934a70a20331e076574b2233924592012"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpnomad/json-schema/zipball/3836658f68e971cfa5a2400b1aa62e84c2becdae",
-                "reference": "3836658f68e971cfa5a2400b1aa62e84c2becdae",
+                "url": "https://api.github.com/repos/phpnomad/json-schema/zipball/16fcc96934a70a20331e076574b2233924592012",
+                "reference": "16fcc96934a70a20331e076574b2233924592012",
                 "shasum": ""
             },
             "require": {
@@ -243,9 +243,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpnomad/json-schema/issues",
-                "source": "https://github.com/phpnomad/json-schema/tree/1.0.0"
+                "source": "https://github.com/phpnomad/json-schema/tree/1.0.1"
             },
-            "time": "2026-04-19T19:12:33+00:00"
+            "time": "2026-06-12T10:57:12+00:00"
         }
     ],
     "packages-dev": [
